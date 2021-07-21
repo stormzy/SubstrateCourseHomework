@@ -66,7 +66,9 @@ fn main() {
                         let stream = streams.get_mut(&client_id).unwrap();
                         match stream.read(buf) {
                             Ok(nread) => {
-                                println!("Received  {} Bytes", nread);
+                                let tmp_str = std::str::from_utf8(buf).unwrap().trim();
+                                print!("recv: {}", tmp_str);
+                                //println!("Received  {} Bytes", nread);
                                 // 如果收到的字节数为0，则标明对端关闭连接
                                 if nread == 0 {
                                     need_close = true;
